@@ -1,21 +1,8 @@
-image: Visual Studio 2022
-platform: x64
-
-environment:
-  VCPKG_DISABLE_METRICS: 1
+image: windows-latest
 
 install:
-  - git clone https://github.com/microsoft/vcpkg C:\vcpkg
-  - ps: C:\vcpkg\bootstrap-vcpkg.bat
-  - ps: C:\vcpkg\vcpkg.exe install spdlog:x64-windows boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows cryptopp:x64-windows lua:x64-windows pugixml:x64-windows mariadb:x64-windows
+  - choco install msys2 -y
+  - refreshenv
 
 build_script:
-  # Configurar build CMake na pasta vc14/build
-  - cmake -B vc14/build -S vc14 -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
-  # Build na pasta vc14/build
-  - cmake --build vc14/build --config Release
-
-artifacts:
-  - path: vc14/build/Release/theforgottenserver.exe
-    name: theforgottenserver-win-x64
-    type: File
+  - bash -c "make -C vc14"
