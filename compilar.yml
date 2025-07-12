@@ -1,28 +1,16 @@
 image: Visual Studio 2022
-
 platform: x64
 
-environment:
-  # Desativa telemetria do vcpkg
-  VCPKG_DISABLE_METRICS: 1
-
 install:
-  # Clonar e bootstrap do vcpkg
   - git clone https://github.com/microsoft/vcpkg C:\vcpkg
   - ps: C:\vcpkg\bootstrap-vcpkg.bat
-
-  # Instalar dependências via vcpkg
   - ps: C:\vcpkg\vcpkg.exe install spdlog:x64-windows boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows cryptopp:x64-windows lua:x64-windows pugixml:x64-windows mariadb:x64-windows
 
 build_script:
-  # Configurar com CMake, usando toolchain do vcpkg e arquitetura x64
   - cmake -B build -S . -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
-
-  # Compilar
   - cmake --build build --config Release
 
 artifacts:
-  # Fazer upload do executável gerado para download
   - path: build\Release\theforgottenserver.exe
     name: theforgottenserver-win-x64
     type: File
