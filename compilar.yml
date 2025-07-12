@@ -2,9 +2,11 @@ image: Visual Studio 2022
 platform: x64
 
 build_script:
+  # Build usando MSBuild com toolset v143 (VS2022)
   - msbuild vc14\theforgottenserver.sln /p:Configuration=Release /p:Platform=x64
 
 artifacts:
+  # Publicar executável gerado para download
   - path: vc14\Release\theforgottenserver.exe
     name: theforgottenserver-win-x64
     type: File
