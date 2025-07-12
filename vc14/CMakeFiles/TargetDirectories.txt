@@ -1,0 +1,3 @@
+/home/rickson/Documentos/GitHub/TVP-Ravenor-Server/vc14/CMakeFiles/theforgottenserver.dir
+/home/rickson/Documentos/GitHub/TVP-Ravenor-Server/vc14/CMakeFiles/edit_cache.dir
+/home/rickson/Documentos/GitHub/TVP-Ravenor-Server/vc14/CMakeFiles/rebuild_cache.dir
