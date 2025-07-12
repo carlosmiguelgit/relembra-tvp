@@ -1,9 +1,6 @@
 image: Visual Studio 2022
 platform: x64
 
-install:
-  # Aqui você pode instalar dependências se quiser, ou garantir que estejam no PATH
-
 build_script:
   - msbuild vc14\theforgottenserver.sln /p:Configuration=Release /p:Platform=x64
 
