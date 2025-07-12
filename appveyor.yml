@@ -1,8 +1,21 @@
-image: windows-latest
+# Usar imagem do Visual Studio 2022 para ter toolset v143
+image: Visual Studio 2022
 
+platform: x64
+
+# Passo de instalação — caso precise instalar dependências via vcpkg, pode adicionar aqui
 install:
-  - choco install msys2 -y
-  - refreshenv
+  # Exemplo para clonar e bootstrap vcpkg (descomente se quiser usar)
+  # - git clone https://github.com/microsoft/vcpkg C:\vcpkg
+  # - ps: C:\vcpkg\bootstrap-vcpkg.bat
+  # - ps: C:\vcpkg\vcpkg.exe install spdlog:x64-windows boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows cryptopp:x64-windows lua:x64-windows pugixml:x64-windows mariadb:x64-windows
 
 build_script:
-  - bash -c "make -C vc14"
+  # Compilar solução usando MSBuild para Release x64
+  - msbuild vc14\theforgottenserver.sln /p:Configuration=Release /p:Platform=x64
+
+artifacts:
+  # Enviar executável gerado para artefatos do build
+  - path: vc14\Release\theforgottenserver.exe
+    name: theforgottenserver-win-x64
+    type: File
